@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public interface AccountController {
 
 
-  @GetMapping("/accountEntities/{accountId}")
+  @GetMapping("/accounts/{accountId}")
   ResponseEntity<Response> getById(@PathVariable Long accountId);
 
   @PostMapping("/account")

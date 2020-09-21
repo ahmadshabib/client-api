@@ -6,10 +6,12 @@ import com.openpayd.clientapi.account.model.AccountBo;
 import com.openpayd.clientapi.account.service.AccountService;
 import com.openpayd.clientapi.common.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
+@Qualifier
 public class AccountControllerImpl implements AccountController {
 
   private final AccountService accountService;
