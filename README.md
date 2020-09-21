@@ -1,12 +1,12 @@
 # OpenPayd Challange
-[![Build Status](https://github.com/ahmadshabib/client-api/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/ahmadshabib/client-api)
+[![Build Status](https://github.com/ahmadshabib/client-api/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)](https://github.com/ahmadshabib/client-api)
 [![codecov](https://codecov.io/gh/ahmadshabib/client-api/branch/master/graph/badge.svg)](https://codecov.io/gh/ahmadshabib/client-api)
 
 This repository has the proposed solution for the first assignment of recruitment process.
 
 ## Architecture
 
-The project is divided into 3 main maven submodules:
+The project is divided into one maven module:
 - `client-api`: includes the both abstract classes and interfaces and the implementations that is used by implementation module.
 
 The project is following `DDD` structure.
