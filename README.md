@@ -1,2 +1,2 @@
-# client-api
-RESTful service for client operations
+# clientEntity-api
+RESTful service for clientEntity operations
