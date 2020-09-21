@@ -20,10 +20,10 @@ public class AccountEntityMapperImpl extends AbstractBoMapper<AccountEntity, Acc
   @Override
   public AccountBo convert(AccountEntity accountEntity) {
     return AccountBo.builder()
-            .clientId(accountEntity.getId())
-            .balance(accountEntity.getBalance())
-            .balanceStatus(accountEntity.getStatus())
-            .accountType(accountEntity.getType())
-            .build();
+        .clientId(accountEntity.getId())
+        .balance(accountEntity.getBalance())
+        .balanceStatus(accountEntity.getStatus())
+        .accountType(accountEntity.getType())
+        .build();
   }
 }

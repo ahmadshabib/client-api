@@ -14,19 +14,15 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class TransactionBo extends AbstractBo {
 
-  @NotNull
-  private Long id;
+  @NotNull private Long id;
 
-  @NotNull
-  private Long debitAccount;
+  @NotNull private Long debitAccount;
 
-  @NotNull
-  private Long creditAccount;
+  @NotNull private Long creditAccount;
 
-  @NotNull
-  private BigDecimal amount;
+  @NotNull private BigDecimal amount;
 
-  private String message = "";
+  private String message;
 
   private LocalDateTime createdAt;
 }

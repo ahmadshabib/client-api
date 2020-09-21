@@ -1,6 +1,5 @@
 package com.openpayd.clientapi.client.controller;
 
-
 import com.openpayd.clientapi.client.model.Client;
 import com.openpayd.clientapi.common.model.Response;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +18,12 @@ public interface ClientController {
   @GetMapping("/client/{clientId}")
   ResponseEntity<Response> getById(@PathVariable Long clientId);
 
-
   @PostMapping("/client")
   ResponseEntity<Response> create(@Validated @RequestBody Client client);
-
 
   @GetMapping("/clients")
   ResponseEntity<Response> listClients();
 
   @GetMapping("/client/{clientId}/accounts")
   ResponseEntity<Response> listAccounts(@PathVariable Long clientId);
-
 }

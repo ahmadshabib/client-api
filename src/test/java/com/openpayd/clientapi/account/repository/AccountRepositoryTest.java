@@ -1,8 +1,6 @@
 package com.openpayd.clientapi.account.repository;
 
-
 import com.openpayd.clientapi.account.entity.AccountEntity;
-import com.openpayd.clientapi.account.repository.AccountRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,7 @@ import java.math.BigDecimal;
 @Transactional
 class AccountRepositoryTest {
 
-  @Autowired
-  private AccountRepository accountRepository;
+  @Autowired private AccountRepository accountRepository;
 
   @Test
   @Sql("/queries/account.sql")
@@ -26,5 +23,4 @@ class AccountRepositoryTest {
     AccountEntity result = accountRepository.findById(1L).get();
     assertEquals(BigDecimal.valueOf(999).intValue(), result.getBalance().intValue());
   }
-
 }

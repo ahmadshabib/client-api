@@ -19,14 +19,16 @@ public class ClientServiceImpl implements ClientService {
   private final ClientEntityMapperImpl clientEntityMapper;
 
   @Autowired
-  public ClientServiceImpl(ClientRepository clientRepository, ClientEntityMapperImpl clientEntityMapper) {
+  public ClientServiceImpl(
+      ClientRepository clientRepository, ClientEntityMapperImpl clientEntityMapper) {
     this.clientRepository = clientRepository;
     this.clientEntityMapper = clientEntityMapper;
   }
 
   @Override
   public ClientBo getClientById(Long clientId) {
-    ClientEntity clientEntity = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+    ClientEntity clientEntity =
+        clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
     return clientEntityMapper.convert(clientEntity);
   }
 

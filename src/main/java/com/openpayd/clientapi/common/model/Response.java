@@ -1,6 +1,5 @@
 package com.openpayd.clientapi.common.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -21,11 +20,11 @@ public class Response {
     fields = new HashMap<>();
   }
 
-  public static Response Error(HttpStatus status) {
+  public static Response error(HttpStatus status) {
     return new Response(status).add("error", status);
   }
 
-  public static Response Success() {
+  public static Response success() {
     return new Response(HttpStatus.OK);
   }
 
@@ -37,11 +36,6 @@ public class Response {
   public Response message(Object value) {
     this.fields.put("message", value);
     return this;
-  }
-
-  @JsonAnyGetter
-  public Map<String, Object> getFields() {
-    return fields;
   }
 
   public ResponseEntity<Response> build() {

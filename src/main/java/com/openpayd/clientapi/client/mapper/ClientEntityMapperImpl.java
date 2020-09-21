@@ -20,12 +20,11 @@ public class ClientEntityMapperImpl extends AbstractBoMapper<ClientEntity, Clien
 
   public ClientBo convert(ClientEntity clientEntity) {
     return ClientBo.builder()
-            .name(clientEntity.getName())
-            .surname(clientEntity.getSurname())
-            .primaryAddress(clientEntity.getPrimaryAddress())
-            .secondaryAddress(clientEntity.getSecondaryAddress())
-            .accountEntities(clientEntity.getAccountEntities())
-            .build();
+        .name(clientEntity.getName())
+        .surname(clientEntity.getSurname())
+        .primaryAddress(clientEntity.getPrimaryAddress())
+        .secondaryAddress(clientEntity.getSecondaryAddress())
+        .accountEntities(clientEntity.getAccountEntities())
+        .build();
   }
 }
-

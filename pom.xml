@@ -191,7 +191,7 @@
                 <configuration>
                     <excludes>
                     </excludes>
-                    <haltOnFailure>true</haltOnFailure>
+                    <haltOnFailure>false</haltOnFailure>
                 </configuration>
             </plugin>
             <plugin>

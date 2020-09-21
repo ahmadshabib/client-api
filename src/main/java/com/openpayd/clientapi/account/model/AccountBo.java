@@ -16,15 +16,11 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 public class AccountBo extends AbstractBo {
-  @NotNull
-  private Long clientId;
+  @NotNull private Long clientId;
 
-  @NotNull
-  private AccountType accountType;
+  @NotNull private AccountType accountType;
 
-  @NotNull
-  private BigDecimal balance;
+  @NotNull private BigDecimal balance;
 
-  @NotNull
-  private BalanceStatus balanceStatus;
+  @NotNull private BalanceStatus balanceStatus;
 }

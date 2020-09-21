@@ -1,6 +1,5 @@
 package com.openpayd.clientapi.transaction.controller;
 
-
 import com.openpayd.clientapi.common.model.Response;
 import com.openpayd.clientapi.transaction.model.Transaction;
 import org.springframework.http.ResponseEntity;

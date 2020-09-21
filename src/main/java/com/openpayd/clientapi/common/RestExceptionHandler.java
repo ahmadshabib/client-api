@@ -1,6 +1,5 @@
 package com.openpayd.clientapi.common;
 
-
 import com.openpayd.clientapi.account.exception.AccountNotFoundException;
 import com.openpayd.clientapi.client.exception.ClientNotFoundException;
 import com.openpayd.clientapi.common.model.Response;
@@ -18,19 +17,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RestExceptionHandler {
 
   @ExceptionHandler({
-          ClientNotFoundException.class,
-          AccountNotFoundException.class,
-          InvalidBalanceStatusException.class,
-          InsufficientBalanceException.class
+    ClientNotFoundException.class,
+    AccountNotFoundException.class,
+    InvalidBalanceStatusException.class,
+    InsufficientBalanceException.class
   })
   public ResponseEntity<Response> handleApplicationException(Exception exception) {
     log.error("Application exception while processing request ", exception);
-    return Response.Error(BAD_REQUEST).message(exception.getMessage()).build();
+    return Response.error(BAD_REQUEST).message(exception.getMessage()).build();
   }
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Response> handleOthers(Exception exception) {
     log.error("Exception while processing request ", exception);
-    return Response.Error(INTERNAL_SERVER_ERROR).message("Something went wrong").build();
+    return Response.error(INTERNAL_SERVER_ERROR).message("Something went wrong").build();
   }
 }

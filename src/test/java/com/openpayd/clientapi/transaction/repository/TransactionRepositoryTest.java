@@ -16,13 +16,12 @@ import java.util.List;
 @Transactional
 class TransactionRepositoryTest {
 
-  @Autowired
-  private TransactionRepository transactionRepository;
+  @Autowired private TransactionRepository transactionRepository;
 
   @Test
   @Sql("/queries/multi_accounts_preparation.sql")
   void updateBalanceTest() {
-    //Set up the credit Account
+    // Set up the credit Account
     AccountEntity creditAccount = new AccountEntity();
     creditAccount.setId(1L);
 
@@ -38,7 +37,6 @@ class TransactionRepositoryTest {
 
     // save the transaction
     transactionRepository.save(transactionEntity);
-
 
     List<TransactionEntity> result = transactionRepository.findByAccountId(1L);
     assertEquals(result.size(), 1);

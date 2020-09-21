@@ -58,7 +58,8 @@ class AccountServiceTest {
     account.setStatus(BalanceStatus.DR);
     account.setBalance(BigDecimal.valueOf(100));
 
-    AccountBo accountBo = AccountBo.builder()
+    AccountBo accountBo =
+        AccountBo.builder()
             .clientId(1L)
             .accountType(AccountType.CURRENT)
             .balanceStatus(BalanceStatus.DR)

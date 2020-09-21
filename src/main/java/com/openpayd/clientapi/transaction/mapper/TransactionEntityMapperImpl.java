@@ -6,7 +6,8 @@ import com.openpayd.clientapi.transaction.model.TransactionBo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransactionEntityMapperImpl extends AbstractBoMapper<TransactionEntity, TransactionBo> {
+public class TransactionEntityMapperImpl
+    extends AbstractBoMapper<TransactionEntity, TransactionBo> {
   @Override
   public TransactionEntity convert(TransactionBo transactionBo) {
     TransactionEntity transactionEntity = new TransactionEntity();
@@ -18,12 +19,12 @@ public class TransactionEntityMapperImpl extends AbstractBoMapper<TransactionEnt
   @Override
   public TransactionBo convert(TransactionEntity transactionEntity) {
     return TransactionBo.builder()
-            .amount(transactionEntity.getAmount())
-            .creditAccount(transactionEntity.getCreditAccountEntity().getId())
-            .debitAccount(transactionEntity.getDebitAccountEntity().getId())
-            .message(transactionEntity.getMessage())
-            .id(transactionEntity.getId())
-            .createdAt(transactionEntity.getCreatedAt())
-            .build();
+        .amount(transactionEntity.getAmount())
+        .creditAccount(transactionEntity.getCreditAccountEntity().getId())
+        .debitAccount(transactionEntity.getDebitAccountEntity().getId())
+        .message(transactionEntity.getMessage())
+        .id(transactionEntity.getId())
+        .createdAt(transactionEntity.getCreatedAt())
+        .build();
   }
 }

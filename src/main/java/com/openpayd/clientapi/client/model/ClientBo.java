@@ -9,20 +9,16 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
 public class ClientBo extends AbstractBo {
 
-  @NotBlank
-  private String name;
+  @NotBlank private String name;
 
-  @NotBlank
-  private String surname;
+  @NotBlank private String surname;
 
-  @NotBlank
-  private String primaryAddress;
+  @NotBlank private String primaryAddress;
 
   private String secondaryAddress;
 

@@ -22,7 +22,8 @@ public class TransactionControllerImpl implements TransactionController {
   private final TransactionMapperImpl transactionMapper;
 
   @Autowired
-  public TransactionControllerImpl(TransactionService transactionService, TransactionMapperImpl transactionMapper) {
+  public TransactionControllerImpl(
+      TransactionService transactionService, TransactionMapperImpl transactionMapper) {
     this.transactionService = transactionService;
     this.transactionMapper = transactionMapper;
   }
@@ -33,19 +34,16 @@ public class TransactionControllerImpl implements TransactionController {
     TransactionBo transactionToCreate = transactionMapper.convert(request);
     TransactionBo createdTransaction = transactionService.createTransaction(transactionToCreate);
     log.info("Transaction {} has been processed", createdTransaction);
-    return Response.Success()
-            .add("transaction", createdTransaction)
-            .build();
+    return Response.success().add("transaction", createdTransaction).build();
   }
 
   @Override
   public ResponseEntity<Response> listAll(Long accountId) {
     log.info("Transaction list of account number {} is being retrieved", accountId);
     List<TransactionBo> transactionBos = transactionService.listAccountTransactions(accountId);
-    List<Transaction> transactions = transactionBos.stream().map(transactionMapper::convert).collect(Collectors.toList());
+    List<Transaction> transactions =
+        transactionBos.stream().map(transactionMapper::convert).collect(Collectors.toList());
     log.info("Transaction list of account number {} has been retrieved", accountId);
-    return Response.Success()
-            .add("transactions", transactions)
-            .build();
+    return Response.success().add("transactions", transactions).build();
   }
 }

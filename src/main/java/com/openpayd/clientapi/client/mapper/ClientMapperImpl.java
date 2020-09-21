@@ -10,15 +10,19 @@ import org.springframework.stereotype.Component;
 public class ClientMapperImpl extends AbstractBoMapper<Client, ClientBo> {
 
   public Client convert(ClientBo clientBo) {
-    return new Client(clientBo.getName(), clientBo.getSurname(),clientBo.getPrimaryAddress(),clientBo.getSecondaryAddress());
+    return new Client(
+        clientBo.getName(),
+        clientBo.getSurname(),
+        clientBo.getPrimaryAddress(),
+        clientBo.getSecondaryAddress());
   }
 
   public ClientBo convert(Client client) {
     return ClientBo.builder()
-            .name(client.getName())
-            .surname(client.getSurname())
-            .primaryAddress(client.getPrimaryAddress())
-            .secondaryAddress(client.getSecondaryAddress())
-            .build();
+        .name(client.getName())
+        .surname(client.getSurname())
+        .primaryAddress(client.getPrimaryAddress())
+        .secondaryAddress(client.getSecondaryAddress())
+        .build();
   }
 }

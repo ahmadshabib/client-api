@@ -1,6 +1,5 @@
 package com.openpayd.clientapi.account.entity;
 
-
 import com.openpayd.clientapi.client.entity.ClientEntity;
 import lombok.Data;
 

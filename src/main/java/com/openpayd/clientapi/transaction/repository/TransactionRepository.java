@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface TransactionRepository extends CrudRepository<TransactionEntity, Long> {
 
-  @Query("SELECT t FROM TransactionEntity t WHERE t.debitAccountEntity.id = :accountId OR t.creditAccountEntity.id = :accountId")
+  @Query(
+      "SELECT t FROM TransactionEntity t WHERE t.debitAccountEntity.id = :accountId OR t.creditAccountEntity.id = :accountId")
   List<TransactionEntity> findByAccountId(@Param("accountId") Long accountId);
 }

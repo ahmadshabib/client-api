@@ -1,6 +1,6 @@
 package com.openpayd.clientapi.account.entity;
 
-public enum  AccountType {
+public enum AccountType {
   CURRENT,
-  SAVINGS;
+  SAVINGS
 }

@@ -22,7 +22,11 @@ public class AccountServiceImpl implements AccountService {
   private final AccountEntityMapperImpl accountEntityMapper;
 
   @Autowired
-  public AccountServiceImpl(AccountRepository accountRepository, ClientService clientService, ClientEntityMapperImpl clientEntityMapper, AccountEntityMapperImpl accountEntityMapper) {
+  public AccountServiceImpl(
+      AccountRepository accountRepository,
+      ClientService clientService,
+      ClientEntityMapperImpl clientEntityMapper,
+      AccountEntityMapperImpl accountEntityMapper) {
     this.accountRepository = accountRepository;
     this.clientService = clientService;
     this.clientEntityMapper = clientEntityMapper;
@@ -31,8 +35,8 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public AccountBo findAccountById(Long accountId) {
-    return accountEntityMapper.convert(accountRepository.findById(accountId)
-            .orElseThrow(AccountNotFoundException::new));
+    return accountEntityMapper.convert(
+        accountRepository.findById(accountId).orElseThrow(AccountNotFoundException::new));
   }
 
   @Override
@@ -40,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
     ClientBo client = clientService.getClientById(accountBO.getClientId());
     AccountEntity account = accountEntityMapper.convert(accountBO);
     account.setClientEntity(clientEntityMapper.convert(client));
-    AccountEntity accountEntity= accountRepository.save(account);
+    AccountEntity accountEntity = accountRepository.save(account);
     return accountEntityMapper.convert(accountEntity);
   }
 

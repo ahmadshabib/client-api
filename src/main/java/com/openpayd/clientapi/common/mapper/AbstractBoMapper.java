@@ -9,7 +9,6 @@ import java.util.List;
  * Abstract class for mappers, implementing common behaviours
  *
  * @author ahmad.shabib
- *
  * @param <A>
  * @param <B>
  */
@@ -42,5 +41,4 @@ public abstract class AbstractBoMapper<A, B extends BusinessObject> implements B
   public <T extends Enum<T>, P extends Enum<P>> T convert(P object, Class<T> mappedClass) {
     return EnumMapper.convert(object, mappedClass);
   }
-
 }

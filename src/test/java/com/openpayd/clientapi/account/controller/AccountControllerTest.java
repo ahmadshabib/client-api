@@ -13,7 +13,6 @@ import com.openpayd.clientapi.account.model.AccountBo;
 import com.openpayd.clientapi.account.service.AccountService;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
-import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -38,17 +37,13 @@ import java.math.BigDecimal;
 @AutoConfigureRestDocs
 class AccountControllerTest {
 
-  @MockBean
-  private AccountService accountService;
+  @MockBean private AccountService accountService;
 
-  @Autowired
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
-  @MockBean
-  AccountMapperImpl accountMapper;
+  @MockBean AccountMapperImpl accountMapper;
 
-  @MockBean
-  AccountEntityMapperImpl accountEntityMapper;
+  @MockBean AccountEntityMapperImpl accountEntityMapper;
 
   private static ResultMatcher jsonResult = content().contentType(MediaType.APPLICATION_JSON);
 
@@ -57,15 +52,17 @@ class AccountControllerTest {
   }
 
   @Test
-  void should_return_account_by_id() throws Exception {
-    Account account = Account.builder()
+  void retrieveById() throws Exception {
+    Account account =
+        Account.builder()
             .balance(BigDecimal.TEN)
             .accountType(AccountType.CURRENT)
             .clientId(1L)
             .balanceStatus(BalanceStatus.DR)
             .build();
 
-    AccountBo accountBo = AccountBo.builder()
+    AccountBo accountBo =
+        AccountBo.builder()
             .balance(BigDecimal.TEN)
             .accountType(AccountType.CURRENT)
             .clientId(1L)
@@ -76,35 +73,41 @@ class AccountControllerTest {
     when(accountEntityMapper.convert(any(AccountEntity.class))).thenReturn(accountBo);
     when(accountMapper.convert(any(AccountBo.class))).thenReturn(account);
 
-    mockMvc.perform(get("/api/accounts/1")
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonResult)
-            .andExpect(jsonPath("$.account.clientId").value(1L))
-            .andExpect(jsonPath("$.account.balance").value(10))
-            .andExpect(jsonPath("$.account.balanceStatus").value("DR"))
-            .andExpect(jsonPath("$.account.accountType").value("CURRENT"))
-            .andDo(document("account/list_account",
-                    responseFields(
-                            fieldWithPath("account.clientId").description(""),
-                            fieldWithPath("account.accountType").description("Account type, can be ['SAVINGS', 'CURRENT']"),
-                            fieldWithPath("account.balance").description("Initial balance of the account"),
-                            fieldWithPath("account.balanceStatus").description("Balance status, can be ['DR', 'CR']")
-                    )
-            ));
+    mockMvc
+        .perform(
+            get("/api/accounts/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonResult)
+        .andExpect(jsonPath("$.fields.account.clientId").value(1L))
+        .andExpect(jsonPath("$.fields.account.balance").value(10))
+        .andExpect(jsonPath("$.fields.account.balanceStatus").value("DR"))
+        .andExpect(jsonPath("$.fields.account.accountType").value("CURRENT"))
+        .andDo(
+            document(
+                "account/list_account",
+                responseFields(
+                    fieldWithPath("fields.account.clientId").description("Id of the associated client"),
+                    fieldWithPath("fields.account.accountType")
+                        .description("fieldsAccount type, can be ['SAVINGS', 'CURRENT']"),
+                    fieldWithPath("fields.account.balance").description("Current"),
+                    fieldWithPath("fields.account.balanceStatus")
+                        .description("Balance status, can be ['DR', 'CR']"))));
   }
 
   @Test
-  void should_create_account() throws Exception {
-    Account request = Account.builder()
+  void accountCreation() throws Exception {
+    Account request =
+        Account.builder()
             .accountType(AccountType.SAVINGS)
             .balance(BigDecimal.TEN)
             .balanceStatus(BalanceStatus.CR)
             .clientId(999L)
             .build();
 
-    AccountBo account = AccountBo.builder()
+    AccountBo account =
+        AccountBo.builder()
             .clientId(999L)
             .accountType(request.getAccountType())
             .balanceStatus(request.getBalanceStatus())
@@ -115,23 +118,28 @@ class AccountControllerTest {
     when(accountMapper.convert(any(Account.class))).thenReturn(account);
     when(accountMapper.convert(any(AccountBo.class))).thenReturn(request);
 
-    mockMvc.perform(post("/api/account")
-            .content(asJson(request))
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonResult)
-            .andExpect(jsonPath("$.accountId").value(999L))
-            .andDo(document("account/create_account",
-                    requestFields(
-                            fieldWithPath("clientId").description(""),
-                            fieldWithPath("accountType").description("Account type, can be ['SAVINGS', 'CURRENT']"),
-                            fieldWithPath("balance").description("Initial balance of the account"),
-                            fieldWithPath("balanceStatus").description("Balance status, can be ['DR', 'CR']")
-                    ),
-                    responseFields(
-                            fieldWithPath("accountId").type(NUMBER).description("Id for newly created account")
-                    )
-            ));
+    mockMvc
+        .perform(
+            post("/api/account")
+                .content(asJson(request))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonResult)
+        .andExpect(jsonPath("$.fields.accountId").value(999L))
+        .andDo(
+            document(
+                "account/create_account",
+                requestFields(
+                    fieldWithPath("clientId").description(""),
+                    fieldWithPath("accountType")
+                        .description("Account type, can be ['SAVINGS', 'CURRENT']"),
+                    fieldWithPath("balance").description("Current balance"),
+                    fieldWithPath("balanceStatus")
+                        .description("Balance status, can be ['DR', 'CR']")),
+                responseFields(
+                    fieldWithPath("fields.accountId")
+                        .type(NUMBER)
+                        .description("Id of the account"))));
   }
 }

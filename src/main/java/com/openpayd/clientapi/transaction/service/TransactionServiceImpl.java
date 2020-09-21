@@ -17,10 +17,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Component
 public class TransactionServiceImpl implements TransactionService {
-
 
   private final AccountService accountService;
 
@@ -31,7 +29,11 @@ public class TransactionServiceImpl implements TransactionService {
   private final AccountEntityMapperImpl accountEntityMapper;
 
   @Autowired
-  public TransactionServiceImpl(AccountService accountService, TransactionEntityMapperImpl transactionEntityMapper, TransactionRepository transactionRepository, AccountEntityMapperImpl accountEntityMapper) {
+  public TransactionServiceImpl(
+      AccountService accountService,
+      TransactionEntityMapperImpl transactionEntityMapper,
+      TransactionRepository transactionRepository,
+      AccountEntityMapperImpl accountEntityMapper) {
     this.accountService = accountService;
     this.transactionEntityMapper = transactionEntityMapper;
     this.transactionRepository = transactionRepository;
@@ -60,8 +62,8 @@ public class TransactionServiceImpl implements TransactionService {
   public List<TransactionBo> listAccountTransactions(Long accountId) {
     AccountBo account = accountService.findAccountById(accountId);
     return transactionRepository.findByAccountId(account.getClientId()).stream()
-            .map(transactionEntityMapper::convert)
-            .collect(Collectors.toList());
+        .map(transactionEntityMapper::convert)
+        .collect(Collectors.toList());
   }
 
   private void validateDebitAccount(AccountBo accountBo, BalanceStatus balanceStatus) {
@@ -74,6 +76,4 @@ public class TransactionServiceImpl implements TransactionService {
       throw new InsufficientBalanceException();
     }
   }
-
-
 }

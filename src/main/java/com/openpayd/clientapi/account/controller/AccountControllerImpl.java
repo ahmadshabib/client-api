@@ -27,9 +27,7 @@ public class AccountControllerImpl implements AccountController {
   public ResponseEntity<Response> getById(Long accountId) {
     AccountBo accountBo = accountService.findAccountById(accountId);
     Account account = accountMapper.convert(accountBo);
-    return Response.Success()
-            .add("account", account)
-            .build();
+    return Response.success().add("account", account).build();
   }
 
   @Override
@@ -37,8 +35,6 @@ public class AccountControllerImpl implements AccountController {
     AccountBo accountToBeCreated = accountMapper.convert(request);
     AccountBo createdAccount = accountService.createAccount(accountToBeCreated);
     Account account = accountMapper.convert(createdAccount);
-    return Response.Success()
-            .add("accountId", account.getClientId())
-            .build();
+    return Response.success().add("accountId", account.getClientId()).build();
   }
 }

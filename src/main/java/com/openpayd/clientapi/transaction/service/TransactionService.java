@@ -14,5 +14,5 @@ public interface TransactionService {
   @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
   TransactionBo createTransaction(TransactionBo request);
 
-   List<TransactionBo> listAccountTransactions(Long accountId);
+  List<TransactionBo> listAccountTransactions(Long accountId);
 }

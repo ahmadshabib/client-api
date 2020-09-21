@@ -14,6 +14,6 @@ public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
   @Modifying
   @Query("UPDATE AccountEntity a SET a.balance = :newBalance WHERE a.id = :accountId")
-  void updateBalance(@Param("accountId") Long accountId, @Param("newBalance") BigDecimal newBalance);
-
+  void updateBalance(
+      @Param("accountId") Long accountId, @Param("newBalance") BigDecimal newBalance);
 }

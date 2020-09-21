@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Component
 public class ClientControllerImpl implements ClientController {
 
@@ -30,36 +29,29 @@ public class ClientControllerImpl implements ClientController {
   @Override
   public ResponseEntity<Response> getById(Long clientId) {
     Client client = clientMapper.convert(clientService.getClientById(clientId));
-    return Response.Success().add("client",client).build();
+    return Response.success().add("client", client).build();
   }
 
   @Override
   public ResponseEntity<Response> create(Client clientRequest) {
     ClientBo clientBo = clientService.createClient(clientMapper.convert(clientRequest));
     Client client = clientMapper.convert(clientBo);
-    return Response.Success()
-            .add("client",client)
-            .build();
+    return Response.success().add("client", client).build();
   }
 
   @Override
   public ResponseEntity<Response> listClients() {
     List<ClientBo> clients = clientService.listAll();
-    List<Client> response = clients.stream()
-            .map(clientMapper::convert)
-            .collect(Collectors.toList());
+    List<Client> response =
+        clients.stream().map(clientMapper::convert).collect(Collectors.toList());
 
-    return Response.Success()
-            .add("clients", response)
-            .build();
+    return Response.success().add("clients", response).build();
   }
 
   @Override
   public ResponseEntity<Response> listAccounts(Long clientId) {
     ClientBo client = clientService.getClientById(clientId);
     List<AccountEntity> accountEntities = client.getAccountEntities();
-    return Response.Success()
-            .add("accountEntities", accountEntities)
-            .build();
+    return Response.success().add("accountEntities", accountEntities).build();
   }
 }
